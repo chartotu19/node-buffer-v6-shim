@@ -31,7 +31,7 @@ try {
 } catch(e) {
   // wish I could do something here to fix the broken Buffer.from
   try {
-	  Object.defineProperty(Buffer, 'from', {
+      Object.defineProperty(Buffer, 'from', {
         configurable: false,
         enumerable: false,
         value:  function(data, encoding, len) {
