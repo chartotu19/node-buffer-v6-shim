@@ -31,7 +31,14 @@ try {
 } catch(e) {
   // wish I could do something here to fix the broken Buffer.from
   try {
-    Buffer.from = newBuffer;
+	  Object.defineProperty(Buffer, 'from', {
+        configurable: false,
+        enumerable: false,
+        value:  function(data, encoding, len) {
+           return new Buffer(data, encoding, len);
+        },
+        writable: false
+      });
   } catch(e) {
     // but alas, I cannot
     console.warn("Your node version has buggy Buffer.from support. Please update to node >= v4.5 or >= v6.3");
